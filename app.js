@@ -40,6 +40,7 @@ var assistant = new AssistantV2({
 
 // Endpoint to be call from the client side
 app.post('/api/message', function(req, res) {
+  //console.log("should send " + bw.getData());
   let assistantId = process.env.ASSISTANT_ID || '<assistant-id>';
   if (!assistantId || assistantId === '<assistant-id>') {
     return res.json({

@@ -271,9 +271,10 @@ input:-moz-placeholder {
   color: #fff;
   overflow-x: auto;
 
-  width: 45%;
+  width: 0%;
   max-width: 32.0625rem;
   min-width: 29.6875rem;
+  display: none;
 }
 
 #payload-column.full {

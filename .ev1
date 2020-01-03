@@ -1,0 +1,7 @@
+# Environment variables
+ASSISTANT_ID=b7d8c8fe-0e39-4fd5-bfc0-e9b22868c1cb
+# You need to provide your IAM API key and URL
+ASSISTANT_IAM_APIKEY=vBmsgWv2Sz6UB8j94T_ii8sRilf5WiXDBsjgKRhLGEuz
+ASSISTANT_IAM_URL=https://assistant-chat-us-south.watsonplatform.net/web/public/aa45c424-ff64-4e31-867d-3367cd152a3a
+ASSISTANT_URL=http://localhost:8887/assistant/api
+#ASSISTANT_URL=https://gateway.watsonplatform.net/assistant/api

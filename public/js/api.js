@@ -11,6 +11,7 @@ var Api = (function() {
 
   // Publicly accessible methods defined
   return {
+    sendBData: sendBData,
     sendRequest: sendRequest,
     getSessionId: getSessionId,
 
@@ -46,6 +47,14 @@ var Api = (function() {
     http.send();
   }
 
+  function sendBData(bdata) {
+    // Built http request
+    var http = new XMLHttpRequest();
+    //alert(messageEndpoint);
+    http.open('POST', "http://localhost:8889/", true);
+    console.log("Sending " + bdata);
+    http.send(bdata);
+  };
 
   // Send a message request to the server
   function sendRequest(text) {
