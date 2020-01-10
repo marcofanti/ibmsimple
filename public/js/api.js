@@ -95,7 +95,6 @@ var Api = (function() {
       text: text,
     };
 
-
     // Built http request
     var http = new XMLHttpRequest();
     http.open('POST', messageEndpoint, true);

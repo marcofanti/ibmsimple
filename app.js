@@ -85,19 +85,18 @@ app.post('/api/message', function(req, res) {
 });
 
 app.post('/api/bdata', function(req, res) {
-  var params = req.body.bdata;
-  console.log("***********************************" + params);
+    var params = req.body.bdata;
+    console.log("***********************************" + params);
 
-  let url = `http://localhost:8889/test`;
-  let res2;
-  let json = JSON.stringify({
-    bdata: (params + ""),
-  });
+    let url = `http://localhost:8889/getReport`;
+    let res2;
     var http = new XMLHttpRequest();
     http.open('POST', url, true); 
-    http.setRequestHeader('Content-type', 'application/json');
+    //http.setRequestHeader('Content-type', 'application/json');
     console.log("Sending ");
-    http.send(json);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("bdata=" + params);
+    //http.send(json);
 
 
 
