@@ -4,8 +4,8 @@ var Api = (function() {
   var requestPayload;
   var responsePayload;
   var messageEndpoint = '/api/message';
-
   var sessionEndpoint = '/api/session';
+  var bdataEndpoint = '/api/bdata';
 
   var sessionId = null;
 
@@ -48,12 +48,39 @@ var Api = (function() {
   }
 
   function sendBData(bdata) {
-    // Built http request
+    let json = JSON.stringify({
+      bdata: (bdata + ""),
+    });
+     // Built http request
+    console.log("json payload" + json);
     var http = new XMLHttpRequest();
     //alert(messageEndpoint);
-    http.open('POST', "http://localhost:8889/", true);
-    console.log("Sending " + bdata);
-    http.send(bdata);
+    console.log("Before sending ");
+    //let formData = new FormData();
+    //formData.append("bdata", bdata);
+    //console.log(formData);
+    http.open('POST', bdataEndpoint, false); 
+    http.setRequestHeader('Content-type', 'application/json');
+    
+    http.onreadystatechange = function() {
+      if (http.readyState === XMLHttpRequest.DONE && http.status === 200 && http.responseText) {
+        Api.setResponsePayload(http.responseText);
+      } else if (http.readyState === XMLHttpRequest.DONE && http.status !== 200) {
+        Api.setErrorPayload({
+          'output': {
+            'generic': [
+              {
+                'response_type': 'text',
+                'text': 'I\'m having trouble connecting to the server, please refresh the page'
+              }
+            ],
+          }
+        });
+      }
+    };
+
+    http.send(json);
+    console.log("Sent");
   };
 
   // Send a message request to the server

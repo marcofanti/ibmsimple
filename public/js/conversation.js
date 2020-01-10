@@ -318,7 +318,7 @@ var ConversationPanel = (function () {
 
   function sendMessage(text) {
     // Send the user message
-//    Api.sendBData(bw.getData());
+    Api.sendBData(bw.getData());
     Api.sendRequest(text);
   }
 

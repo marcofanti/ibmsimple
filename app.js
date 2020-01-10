@@ -15,18 +15,22 @@
  * limitations under the License.
  */
 
-'use strict';
+//'use strict';
 
 var express = require('express'); // app server
 var bodyParser = require('body-parser'); // parser for post requests
 var AssistantV2 = require('ibm-watson/assistant/v2'); // watson sdk
 const { IamAuthenticator } = require('ibm-watson/auth');
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
+const cors = require("cors");
 
 var app = express();
 
 // Bootstrap application settings
 app.use(express.static('./public')); // load UI from public folder
 app.use(bodyParser.json());
+app.use(cors());
 
 // Create the service wrapper
 
@@ -79,6 +83,31 @@ app.post('/api/message', function(req, res) {
     return res.json(data);
   });
 });
+
+app.post('/api/bdata', function(req, res) {
+  var params = req.body.bdata;
+  console.log("***********************************" + params);
+
+  let url = `http://localhost:8889/test`;
+  let res2;
+  let json = JSON.stringify({
+    bdata: (params + ""),
+  });
+    var http = new XMLHttpRequest();
+    http.open('POST', url, true); 
+    http.setRequestHeader('Content-type', 'application/json');
+    console.log("Sending ");
+    http.send(json);
+
+
+
+
+
+
+
+   res.status(200).end()
+});
+
 
 app.get('/api/session', function(req, res) {
   assistant.createSession(
