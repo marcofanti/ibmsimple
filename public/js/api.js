@@ -84,17 +84,26 @@ var Api = (function() {
   };
 
   // Send a message request to the server
-  function sendRequest(text) {
+  function sendRequest(text, bdata) {
+//    sendBData(bdata);
     // Build request payload
     var payloadToWatson = {
       session_id: sessionId
     };
 
+    if (bdata != null) {
+      payloadToWatson = {
+        session_id: sessionId,
+      };
+    }
+
     payloadToWatson.input = {
       message_type: 'text',
       text: text,
+      bdata: bdata,
     };
 
+    
     // Built http request
     var http = new XMLHttpRequest();
     http.open('POST', messageEndpoint, true);
@@ -122,7 +131,7 @@ var Api = (function() {
     if (Object.getOwnPropertyNames(payloadToWatson).length !== 0) {
       Api.setRequestPayload(params);
     }
-
+    console.log("params = " + params);
     // Send request
     http.send(params);
   }

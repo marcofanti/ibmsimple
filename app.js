@@ -62,6 +62,7 @@ app.post('/api/message', function(req, res) {
 
   if (req.body.input) {
     textIn = req.body.input.text;
+    bdata = req.body.input.bdata;
   }
 
   var payload = {
@@ -70,6 +71,7 @@ app.post('/api/message', function(req, res) {
     input: {
       message_type: 'text',
       text: textIn,
+      bdata: bdata,
     },
   };
 
@@ -84,30 +86,6 @@ app.post('/api/message', function(req, res) {
   });
 });
 
-app.post('/api/bdata', function(req, res) {
-    var params = req.body.bdata;
-    console.log("***********************************" + params);
-
-    let url = `http://localhost:8889/getReport`;
-    let res2;
-    var http = new XMLHttpRequest();
-    http.open('POST', url, true); 
-    //http.setRequestHeader('Content-type', 'application/json');
-    console.log("Sending ");
-    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http.send("bdata=" + params);
-    //http.send(json);
-
-
-
-
-
-
-
-   res.status(200).end()
-});
-
-
 app.get('/api/session', function(req, res) {
   assistant.createSession(
     {
@@ -121,6 +99,20 @@ app.get('/api/session', function(req, res) {
       }
     }
   );
+});
+
+app.post('/api/bdata', function(req, res) {
+  var params = req.body.bdata;
+  let url = `http://localhost:8889/getReport`;
+  let res2;
+  var http = new XMLHttpRequest();
+  http.open('POST', url, true); 
+  //http.setRequestHeader('Content-type', 'application/json');
+  console.log("Sending ");
+  http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  http.send("bdata=" + params);
+  //http.send(json);
+ res.status(200).end()
 });
 
 module.exports = app;

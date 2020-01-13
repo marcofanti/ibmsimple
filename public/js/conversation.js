@@ -318,8 +318,10 @@ var ConversationPanel = (function () {
 
   function sendMessage(text) {
     // Send the user message
-    Api.sendBData(bw.getData());
-    Api.sendRequest(text);
+//    Api.sendBData(bw.getData());
+    bw.re
+    Api.sendRequest(text, bw.getData());
+    
   }
 
   // Handles the submission of input

@@ -165,8 +165,11 @@ var fdata = function (window, document, monitorName, config) {
     }
 
     function getData(resetData, stopCollector) {
+        console.log('reset ' + resetData + ' ' + stopCollector);
         _state === RUNNING_STATE.STOPPED && (configure(), reset());
         var data = JSON.stringify(getBehavioData());
+        console.log("********************* reseting ************************");
+        reset();
         return resetData && reset(), stopCollector && stopMonitor(), data
     }
 
@@ -563,14 +566,15 @@ var inputEventListener = function functionInputEventListener() {
 
 var submitCollectedData = function functionSubmitCollectedData() {
     var outputVariable = document.forms[0].elements['%1$s'];
-    outputVariable.value = bw.getData();
+    outputVariable.value = bw.getData(true);
+    //bfdata.reset();
     console.log("Submitted " + outputVariable);
 }
 
 if (document.getElementById("textInput") != undefined) {
     console.log("Starting collector script");
     fdata(window, document, "bw", {autoload: !0});
-    console.log("started " + bw.getData());
+    console.log("started " + bw.getData(true));
 //    var inputField = document.getElementsByClassName("form-control")[0];
 //    userNameField.addEventListener("blur", userNameEventListener);
 //    console.log("Finished adding userNameEventListener (onblur)");
