@@ -31,6 +31,7 @@ var ConversationPanel = (function () {
       Api.sendRequest('', null);
     });
     setupInputBox();
+    //bw.init();
   }
   // Set up callbacks on payload setters in Api module
   // This causes the displayMessage function to be called when messages are sent / received
@@ -319,9 +320,13 @@ var ConversationPanel = (function () {
   function sendMessage(text) {
     // Send the user message
 //    Api.sendBData(bw.getData());
-    bw.re
+ //   bw.re
+// console.log(bw.getBehavioData(false));
+ //console.log(bw.getBehavioData(false)[0]);
+    //Api.sendRequest(text, bw.getBehavioData(true));
     Api.sendRequest(text, bw.getData());
-    
+ 
+ //Api.sendRequest(text, bw.getData());
   }
 
   // Handles the submission of input
